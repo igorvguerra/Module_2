@@ -25,10 +25,6 @@ print("\nExample of inheritance:")
 class Animal:
     def __init__(self, name) -> None:
         self.name = name
-
-    def walk(self):
-        print(f"The animal {self.name} is walking")
-        return
     
     def make_sound(self):
         pass 
@@ -43,6 +39,8 @@ class Cat(Animal):
     
 dog_1 = Dog(name="Hazel")
 cat_1 = Cat(name="Blacky")
+
+#polymorphism
 
 print("\nExample of polymorphism:")
 animals = [dog_1, cat_1]
@@ -84,3 +82,53 @@ account_2 = BankAccount(balance = 50)
 print(f"Your account balance is: ${account_2.check_balance()}")
 account_2.deposit(value = 100)
 print(f"Your account balance is: ${account_2.check_balance()}")
+
+
+#abstraction
+
+print("\nExample of Abstraction")
+from abc import ABC, abstractmethod
+
+class Vehicle(ABC):
+    @abstractmethod
+    def turn_on(self):
+        pass
+    
+    @abstractmethod
+    def turn_off(self):
+        pass
+
+class Car(Vehicle):
+    def __init__(self):
+        pass
+    def turn_on(self):
+        return "Car is turned on using the key"
+    def turn_off(self):
+        return "Car is turned off using the key"
+    
+red_car = Car()
+print(red_car.turn_on())
+print(red_car.turn_off())
+
+#multiple inheritance
+
+class Mammal(Animal):
+    def breastfeeding(self):
+        return f"{self.name} is breastfeeding."
+    
+class Bird(Animal):
+    def flying(self):
+        return f"{self.name} is flying."
+    
+class Bat(Mammal, Bird):
+    def make_sound(self):
+        return "Bats can use ultrasound for echolocation."
+    
+bat = Bat(name = "Batman")
+
+print("Bat's name:", bat.name)
+print("Can a bat make a sound?", bat.make_sound())
+
+print("Bats can breastfeed:", bat.breastfeeding())
+print("Bats can fly:", bat.flying())
+
