@@ -1,3 +1,5 @@
+import random
+
 class Character:
     def __init__(self, name, life, level):
         self.__name = name
@@ -22,7 +24,7 @@ class Character:
             self.__life = 0
 
     def attack(self, target):
-        damage = self.__level * 2
+        damage = random.randint(self.get_level() * 2, self.get_level() * 4)
         target.receive_attack(damage)
         print(f"{self.get_name()} attacked {target.get_name()} and gave {damage} of damage!")
     
@@ -38,7 +40,7 @@ class Hero(Character):
     def show_details(self):
         return f"{super().show_details()}\nSpecial Skill: {self.get_special_skill()}\n"
     def use_special_skill(self, target):
-        damage = self.get_level() * 5
+        damage = random.randint(self.get_level() * 5, self.get_level() * 8)
         target.receive_attack(damage)
         print(f"{self.get_name()} used special skill {self.get_special_skill()} on {target.get_name()} and gave {damage} of damage!")
 
@@ -57,7 +59,7 @@ class Enemy(Character):
 class Game:
     def __init__(self):
         self.hero = Hero(name="Birdman", life=100, level=5, special_skill="Fly")
-        self.enemy = Enemy(name="Ekans", life=50, level=3, type="Poisonous")
+        self.enemy = Enemy(name="Ekans", life=70, level=4, type="Poisonous")
     
     def starting_battle(self):
         print("Battle has started!")
@@ -79,7 +81,7 @@ class Game:
             if self.enemy.get_life() > 0:
                 self.enemy.attack(self.hero)
 
-                
+
         if self.hero.get_life() > 0:
             print("\nCongratulations, you won the battle!")
         else:
