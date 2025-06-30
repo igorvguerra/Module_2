@@ -132,3 +132,86 @@ print("Can a bat make a sound?", bat.make_sound())
 print("Bats can breastfeed:", bat.breastfeeding())
 print("Bats can fly:", bat.flying())
 
+
+
+
+#decorator
+
+def my_decorator(func):
+    def wrapper():
+        print("\nBefore calling the function.")
+        func()
+        print("After calling the function.")
+    return wrapper
+
+@my_decorator
+def my_function():
+    print("My function was called.")
+
+my_function()
+
+class MyClassDecorator:
+    def __init__(self, func):
+        self.func = func
+    def __call__(self):
+        print("\nBefore calling the function with the Class decorator.")
+        self.func()
+        print("After calling the function with the Class decorator.")
+        pass
+
+@MyClassDecorator
+def second_function():
+    print("Calling the function with the Class decorator.")
+
+second_function()
+
+
+# @classmethod
+# @staticmethod
+
+
+class NewClass:
+    value = 10 # class atribute.
+
+    def __init__(self, name):
+        self.name = name # instance atribute.
+
+    def instance_method(self): #require an instance to be called.
+        return f"instance method called for {self.name}."
+    
+    @classmethod
+    def class_method(cls):
+        return f"class method called for value = {cls.value}."
+    
+    @staticmethod
+    def static_method():
+        return "Static method was called."
+    
+
+obj = NewClass(name = "Class Example")
+print(obj.instance_method())
+print(NewClass.value)
+print(NewClass.class_method())
+print(NewClass.static_method())
+
+class Motorcycle:
+    def __init__(self, brand, model, year):
+        self.brand = brand
+        self.model = model
+        self.year = year
+
+    @classmethod
+    def create_motorcycle(cls, configuration):
+        brand, model, year = configuration.split(",")
+        return cls(brand, model, int(year))
+    
+configuration1 = "SYM,GTS300i,2010"
+motorcycle1 = Motorcycle.create_motorcycle(configuration1)
+print(f"\nBrand: {motorcycle1.brand}\nModel: {motorcycle1.model}\nYear: {motorcycle1.year}")
+
+
+class Math:
+    @staticmethod
+    def sum(a, b):
+        return a + b
+print(Math.sum(a = 10, b = 4))
